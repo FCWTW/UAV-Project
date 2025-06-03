@@ -1,0 +1,17 @@
+<launch>
+  <!-- 載入YOLO物件偵測節點 -->
+  <node pkg="yolo_ros" type="yolo_detect.py" name="yolo_detector" output="screen" respawn="true">
+    <!-- 相機話題參數 -->
+    <param name="camera_topic" value="/camera/color/image_raw"/>
+  </node>
+
+  <!-- Rviz視覺化 -->
+  <node pkg="rviz" type="rviz" name="rviz3" args="-d $(find yolo_ros)/config/yolo.rviz">
+    <env name="QT_ENABLE_HIGHDPI_SCALING" value="0"/>
+  </node>
+
+  <!-- 點雲視角轉換 -->
+  <!-- <node pkg="tf" type="static_transform_publisher" name="camera_optical_frame_fix" 
+      args="0 0 0 2.35 6.26 4 r200_camera_depth_optical_frame r200_camera_depth_aligned_frame 100"/> -->
+
+</launch>
